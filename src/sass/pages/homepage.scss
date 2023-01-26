@@ -2,11 +2,14 @@
 
 .homepage {
   font-family: 'Quicksand', 'Nunito', Verdana, Geneva, Tahoma, sans-serif;
-  margin-left: auto;
+  // margin-left: auto;
   padding: v.$spacer;
   padding-left: v.$spacer * 2;
   grid-area: main;
   height: 100%;
+  @media (max-width: 450px) {
+    padding: v.$spacer;
+  }
   @media (min-width: 750px) {
     display: block !important;
   }
@@ -23,11 +26,17 @@
     font-size: 1.2rem;
     margin-top: v.$spacer * 2;
     width: 100%;
+    grid-column: 1 / -1;
   }
   section > div {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-auto-rows: auto;
     align-items: start;
-    flex-wrap: wrap;
     gap: v.$spacer;
+    // display: flex;
+    // align-items: start;
+    // flex-wrap: wrap;
+    // gap: v.$spacer;
   }
 }

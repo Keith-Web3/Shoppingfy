@@ -26,12 +26,22 @@
   }
   .category {
     transition: border-color 150ms linear;
+
+    img {
+      opacity: 0;
+      cursor: pointer;
+      transform: opacity 500ms linear;
+    }
   }
   .category input:focus {
     border-color: #f9a109;
   }
   .category:has(input:focus) {
     color: #f9a109;
+
+    img {
+      opacity: 1;
+    }
   }
   .drop-down {
     width: 100%;

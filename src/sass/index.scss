@@ -6,7 +6,7 @@ body {
 
   main {
     display: grid;
-    grid-template: 1fr / 77px auto auto;
+    grid-template: 1fr / 77px 1fr auto;
     grid-template-areas: 'nav main aside';
     align-items: start;
     max-width: 1600px;

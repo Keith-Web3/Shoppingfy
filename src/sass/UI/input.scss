@@ -6,6 +6,7 @@
   text-transform: capitalize;
   font-weight: 600;
   color: #34333a;
+  position: relative;
 
   input,
   textarea {
@@ -24,5 +25,11 @@
   textarea {
     height: 100px;
     resize: none;
+  }
+  img {
+    width: 1rem;
+    position: absolute;
+    inset: auto v.$spacer v.$spacer * 0.7 auto;
+    cursor: text;
   }
 }

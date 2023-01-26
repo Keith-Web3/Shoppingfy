@@ -7,7 +7,7 @@
   @include v.flexbox($align: baseline, $justify: space-between);
   flex-direction: column;
   @media (min-width: 1080px) {
-    flex: row;
+    flex-direction: row;
   }
 
   p {

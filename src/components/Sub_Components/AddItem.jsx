@@ -3,6 +3,7 @@ import React, { useRef } from 'react'
 import Input from '../UI/Input'
 import '../../sass/sub-components/add_item.scss'
 import Button from '../UI/Button'
+import cancel from '../../assets/xmark-solid.svg'
 
 function AddItem({ navShown }) {
   const dropDownRef = useRef()
@@ -21,11 +22,13 @@ function AddItem({ navShown }) {
         <Input
           className="category"
           label="Category"
-          maxLength={0}
+          readOnly={true}
           placeholder="Enter a category"
           onFocus={() => dropDownRef.current.classList.add('visible')}
           onBlur={() => dropDownRef.current.classList.remove('visible')}
-        />
+        >
+          <img src={cancel} alt="cancel" />
+        </Input>
         <div className="drop-down" ref={dropDownRef}>
           <p>Fruits and vegetables</p>
           <p className="active">Meat and Fish</p>

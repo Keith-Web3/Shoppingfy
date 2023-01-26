@@ -3,6 +3,7 @@
 .shopping_list {
   margin-left: auto;
   padding: v.$spacer;
+  padding-bottom: 0;
   background: #fff0de;
   font-family: 'Quicksand', 'Nunito', Verdana, Geneva, Tahoma, sans-serif;
   height: 100%;
@@ -11,7 +12,7 @@
     display: block !important;
     max-width: 390px;
   }
-  .container {
+  & > .container {
     position: sticky;
     top: 0;
   }
@@ -64,5 +65,22 @@
       margin-bottom: v.$spacer;
     }
     margin-block: v.$spacer;
+  }
+  .input {
+    position: relative;
+    background: #fff;
+    padding: v.$spacer * 1.5 v.$spacer;
+    width: calc(100% + 2em);
+    transform: translateX(-1em);
+
+    input {
+      border-color: #f9a109;
+      margin: 0;
+    }
+    button {
+      position: absolute;
+      inset: 50% v.$spacer auto auto;
+      transform: translateY(-50%);
+    }
   }
 }

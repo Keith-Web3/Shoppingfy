@@ -13,7 +13,7 @@ function Input({
   onFocus,
   onBlur,
   className,
-  maxLength,
+  readOnly,
 }) {
   const id = useId()
 
@@ -29,7 +29,7 @@ function Input({
         ></textarea>
       ) : (
         <input
-          maxLength={maxLength}
+          readOnly={readOnly}
           type={type}
           id={id}
           placeholder={placeholder}

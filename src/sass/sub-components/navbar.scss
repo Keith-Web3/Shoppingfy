@@ -32,6 +32,7 @@
     place-content: center;
     border-radius: 50%;
     background: #f9a109;
+    cursor: pointer;
     position: relative;
 
     p {
@@ -50,7 +51,6 @@
     }
     img {
       width: 25px;
-      cursor: pointer;
     }
   }
 }

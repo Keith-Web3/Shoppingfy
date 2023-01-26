@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useId } from 'react'
 import { nanoid } from 'nanoid'
 
 import bottle from '../../assets/source.svg'
@@ -9,6 +9,8 @@ import shoppingData from '../Data/ShoppingItems'
 import Items from './Items'
 
 function ShoppingList({ navShown }) {
+  const id = useId()
+
   const { fruits, beverages, meat } = shoppingData
   return (
     <div
@@ -46,6 +48,12 @@ function ShoppingList({ navShown }) {
               <Items key={nanoid()} item={item} />
             ))}
           </div>
+        </div>
+        <div className="input">
+          <label htmlFor={id}>
+            <input type="text" id={id} placeholder="Enter a name" />
+            <Button style={{ bg: '#F9A109', color: '#FFFFFF' }}>Save</Button>
+          </label>
         </div>
       </div>
     </div>

@@ -1,0 +1,73 @@
+@use '../variables' as v;
+
+.addItem {
+  grid-area: aside;
+  padding: v.$spacer;
+  font-family: 'Quicksand', 'Nunito', Verdana, Geneva, Tahoma, sans-serif;
+  height: 100%;
+
+  @media (min-width: 750px) {
+    display: block !important;
+    max-width: 390px;
+  }
+
+  .container {
+    position: sticky;
+    top: v.$spacer;
+  }
+  @media (min-width: 385px) {
+    min-width: 360px;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: 1.45rem;
+    margin-bottom: v.$spacer;
+  }
+  .category {
+    transition: border-color 150ms linear;
+  }
+  .category input:focus {
+    border-color: #f9a109;
+  }
+  .category:has(input:focus) {
+    color: #f9a109;
+  }
+  .drop-down {
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+    padding: v.$spacer;
+    opacity: 0;
+    transform: translateY(-20%);
+    position: absolute;
+    transition: transform 300ms linear, opacity 300ms linear;
+    visibility: hidden;
+
+    &.visible {
+      visibility: visible;
+      position: unset;
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    p {
+      padding: v.$spacer;
+      cursor: pointer;
+      color: #828282;
+
+      &.active {
+        color: #34333a;
+        background-color: #f2f2f2;
+        border-radius: 12px;
+      }
+    }
+  }
+  .button-container {
+    margin-top: v.$spacer * 2;
+    @include v.flexbox;
+    font-weight: 600;
+  }
+}

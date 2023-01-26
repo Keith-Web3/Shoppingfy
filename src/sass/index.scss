@@ -1,0 +1,16 @@
+@use 'resets';
+@use 'variables' as v;
+
+body {
+  background: #fafafe;
+
+  main {
+    display: grid;
+    grid-template: 1fr / 77px auto auto;
+    grid-template-areas: 'nav main aside';
+    align-items: start;
+    max-width: 1600px;
+    margin-inline: auto;
+    position: relative;
+  }
+}

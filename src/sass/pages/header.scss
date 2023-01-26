@@ -1,0 +1,42 @@
+@use '../variables' as v;
+
+.header {
+  @media (max-width: 600px) {
+    display: none;
+  }
+  @include v.flexbox($align: baseline, $justify: space-between);
+  flex-direction: column;
+  @media (min-width: 1080px) {
+    flex: row;
+  }
+
+  p {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #34333a;
+  }
+  span {
+    color: #f9a109;
+    font-weight: 700;
+  }
+  label {
+    position: relative;
+    width: max-content;
+
+    img {
+      position: absolute;
+      inset: 50% auto auto v.$spacer;
+      transform: translateY(-50%);
+      width: 1rem;
+    }
+    input {
+      border: none;
+      outline: none;
+      background-color: #ffffff;
+      box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
+      border-radius: 12px;
+      padding: 0.75em 1.3em 0.75em 3.3em;
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,62 @@
+@use '../variables' as v;
+
+.item-preview {
+  grid-area: aside;
+  padding: v.$spacer v.$spacer * 2;
+  font-family: 'Quicksand', 'Nunito', Verdana, Geneva, Tahoma, sans-serif;
+  height: 100%;
+  background: #fff;
+
+  @media (min-width: 385px) {
+    min-width: 360px;
+  }
+  @media (min-width: 750px) {
+    max-width: 390px;
+    display: block !important;
+  }
+
+  .container {
+    position: sticky;
+    top: v.$spacer;
+
+    .back-btn {
+      @include v.flexbox($justify: start);
+      cursor: pointer;
+
+      img {
+        width: 20px;
+      }
+      p {
+        font-weight: 600;
+        color: #f9a109;
+      }
+    }
+    & > img {
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 25px;
+      aspect-ratio: 300.43 / 219.69;
+      margin-top: v.$spacer;
+    }
+    h3 {
+      color: #c1c1c4;
+      font-weight: 500;
+      font-size: 1rem;
+      margin-block: v.$spacer v.$spacer * 0.25;
+    }
+    h3 + p {
+      color: #000;
+      font-weight: 600;
+      font-size: 1.1rem;
+
+      &:first-of-type {
+        font-size: 1.3rem;
+      }
+    }
+    .btn-container {
+      @include v.flexbox;
+      margin-top: v.$spacer * 2;
+    }
+  }
+}

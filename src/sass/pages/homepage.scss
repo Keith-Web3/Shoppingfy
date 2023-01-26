@@ -1,0 +1,33 @@
+@use '../variables' as v;
+
+.homepage {
+  font-family: 'Quicksand', 'Nunito', Verdana, Geneva, Tahoma, sans-serif;
+  margin-left: auto;
+  padding: v.$spacer;
+  padding-left: v.$spacer * 2;
+  grid-area: main;
+  height: 100%;
+  @media (min-width: 750px) {
+    display: block !important;
+  }
+
+  .container {
+    position: sticky;
+    top: v.$spacer;
+  }
+
+  * {
+    font-weight: 600;
+  }
+  h2 {
+    font-size: 1.2rem;
+    margin-top: v.$spacer * 2;
+    width: 100%;
+  }
+  section > div {
+    display: flex;
+    align-items: start;
+    flex-wrap: wrap;
+    gap: v.$spacer;
+  }
+}

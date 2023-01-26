@@ -1,0 +1,56 @@
+@use '../variables' as v;
+
+.navigation {
+  @include v.flexbox(column, $justify: space-between);
+  background-color: #fff;
+  width: max-content;
+  height: 100dvh;
+  padding: v.$spacer;
+  position: fixed;
+  inset: 0 auto 0 0;
+  user-select: none;
+  -webkit-user-select: none;
+  grid-area: main;
+
+  img {
+    width: 40px;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .pages {
+    @include v.flexbox(column, $gap: v.$spacer * 3);
+    cursor: pointer;
+
+    img {
+      width: 25px;
+    }
+  }
+  .cart {
+    width: 45px;
+    height: 45px;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+    background: #f9a109;
+    position: relative;
+
+    p {
+      font-family: 'Quicksand', 'Nunito', Verdana, Geneva, Tahoma, sans-serif;
+      position: absolute;
+      inset: 0 0 auto auto;
+      transform: translate(30%, -30%);
+      font-weight: 700;
+      color: #fff;
+      background: #eb5757;
+      border-radius: 4px;
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+    }
+    img {
+      width: 25px;
+      cursor: pointer;
+    }
+  }
+}

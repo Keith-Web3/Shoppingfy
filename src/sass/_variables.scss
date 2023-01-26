@@ -1,0 +1,14 @@
+$spacer: 1em;
+
+@mixin flexbox(
+  $direction: row,
+  $align: center,
+  $justify: center,
+  $gap: $spacer
+) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
+}

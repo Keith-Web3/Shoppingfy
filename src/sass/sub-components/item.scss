@@ -1,0 +1,19 @@
+@use '../variables' as v;
+
+.item {
+  @include v.flexbox($align: start, $justify: space-between);
+
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  background-color: #fff;
+  padding: v.$spacer;
+  min-width: 140px;
+
+  p {
+    max-width: 140px;
+  }
+  img {
+    width: 20px;
+    cursor: pointer;
+  }
+}

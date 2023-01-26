@@ -9,8 +9,9 @@ import '../../../sass/pages/history.scss'
 
 function History({ navShown }) {
   const events = Object.entries(eventsData)
-  const state = useSelector(state => state.events)
-  console.log(events)
+  const state = useSelector(state => Object.entries(state.events))
+
+  console.log(state)
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -22,7 +23,7 @@ function History({ navShown }) {
     >
       <div className="container">
         <h2>Shopping History</h2>
-        {events.map(([name, event]) => {
+        {state.map(([name, event]) => {
           return (
             <div key={nanoid()}>
               <h3>{name}</h3>

@@ -12,7 +12,7 @@ function ItemPreview({ navShown, newItem, setAsideState }) {
 
   const submitHandler = function () {
     dispatch(
-      actions.addItem({ category: newItem.category, item: newItem.name })
+      actions.items.addItem({ category: newItem.category, item: newItem.name })
     )
     setAsideState('list')
   }

@@ -31,7 +31,10 @@ function Homepage({ navShown }) {
                   <Item
                     onClick={() => {
                       dispatch(
-                        actions.addItem({ category: item[0], item: data.item })
+                        actions.items.addItem({
+                          category: item[0],
+                          item: data.item,
+                        })
                       )
                     }}
                     key={nanoid()}

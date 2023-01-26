@@ -71,18 +71,18 @@ const eventsSlice = createSlice({
       if (state[payload.date]) {
         state[payload.date] = [
           ...state[payload.date],
-          { name: payload.name, day: payload.day, state: payload.state },
+          { name: payload.name, date: payload.day, status: payload.state },
         ]
       } else {
         state[payload.date] = [
-          { name: payload.name, day: payload.day, state: payload.state },
+          { name: payload.name, date: payload.day, status: payload.state },
         ]
       }
     },
   },
 })
 
-export default itemsSlice.actions
+export default { items: itemsSlice.actions, events: eventsSlice.actions }
 
 export const store = configureStore({
   reducer: { items: itemsSlice.reducer, events: eventsSlice.reducer },

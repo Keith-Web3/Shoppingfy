@@ -1,8 +1,9 @@
-import React, { useId } from 'react'
+import React, { useId, useRef } from 'react'
 import { nanoid } from 'nanoid'
 import { motion } from 'framer-motion'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
+import actions from '../Store/index'
 import bottle from '../../assets/source.svg'
 import Button from '../UI/Button'
 import pen from '../../assets/pen-solid.svg'
@@ -11,8 +12,32 @@ import Items from './Items'
 
 function ShoppingList({ navShown, setAsideState }) {
   const id = useId()
+  const inputRef = useRef()
+  const dispatch = useDispatch()
 
   const state = useSelector(state => Object.entries(state.items))
+
+  const submitHandler = function () {
+    if (inputRef.current.value.trim()) {
+      const date = new Date()
+      const day = new Intl.DateTimeFormat(['en', 'GB']).format(date).split('/')
+      const [week, , monthL] = new Intl.DateTimeFormat('en-GB', {
+        weekday: 'short',
+        month: 'long',
+      })
+        .format(date)
+        .split(' ')
+
+      dispatch(
+        actions.events.addEvent({
+          day: `${week} ${day.join('.')}`,
+          state: 'pending',
+          name: inputRef.current.value,
+          date: `${monthL.slice(0, -1)} ${day[2]}`,
+        })
+      )
+    }
+  }
 
   return (
     <motion.div
@@ -53,8 +78,18 @@ function ShoppingList({ navShown, setAsideState }) {
         </div>
         <div className="input">
           <label htmlFor={id}>
-            <input type="text" id={id} placeholder="Enter a name" />
-            <Button style={{ bg: '#F9A109', color: '#FFFFFF' }}>Save</Button>
+            <input
+              type="text"
+              id={id}
+              placeholder="Enter a name"
+              ref={inputRef}
+            />
+            <Button
+              onClick={submitHandler}
+              style={{ bg: '#F9A109', color: '#FFFFFF' }}
+            >
+              Save
+            </Button>
           </label>
         </div>
       </div>

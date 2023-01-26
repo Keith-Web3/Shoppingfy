@@ -46,6 +46,10 @@
         color: #eb5757;
         border: 1px solid #eb5757;
       }
+      &.pending {
+        color: #c1c1c4;
+        border-color: #c1c1c4;
+      }
     }
   }
 }

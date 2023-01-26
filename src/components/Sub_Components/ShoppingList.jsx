@@ -2,6 +2,7 @@ import React, { useId, useRef } from 'react'
 import { nanoid } from 'nanoid'
 import { motion } from 'framer-motion'
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import actions from '../Store/index'
 import bottle from '../../assets/source.svg'
@@ -12,6 +13,7 @@ import Items from './Items'
 
 function ShoppingList({ navShown, setAsideState }) {
   const id = useId()
+  const navigate = useNavigate()
   const inputRef = useRef()
   const dispatch = useDispatch()
 
@@ -36,6 +38,7 @@ function ShoppingList({ navShown, setAsideState }) {
           date: `${monthL.slice(0, -1)} ${day[2]}`,
         })
       )
+      navigate('/history')
     }
   }
 

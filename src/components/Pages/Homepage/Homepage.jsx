@@ -1,5 +1,6 @@
 import React from 'react'
 import { nanoid } from 'nanoid'
+import { motion } from 'framer-motion'
 
 import Header from './Header'
 import Item from '../../Sub_Components/Item'
@@ -8,7 +9,14 @@ import '../../../sass/pages/homepage.scss'
 
 function Homepage({ navShown }) {
   return (
-    <div className="homepage" style={{ display: navShown ? 'none' : 'block' }}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      // transition={{ type: 'tween', duration: 0.25 }}
+      className="homepage"
+      style={{ display: navShown ? 'none' : 'block' }}
+    >
       <div className="container">
         <Header />
         <section>
@@ -32,7 +40,7 @@ function Homepage({ navShown }) {
           </div>
         </section>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

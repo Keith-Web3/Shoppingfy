@@ -18,6 +18,9 @@
     margin-block: v.$spacer * 0.6 v.$spacer * 1.3;
     width: 100%;
 
+    &:focus {
+      border-color: #f9a109;
+    }
     &::placeholder {
       color: #bdbdbd;
     }

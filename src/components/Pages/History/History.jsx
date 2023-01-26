@@ -1,15 +1,23 @@
 import React from 'react'
 import { nanoid } from 'nanoid'
+import { motion } from 'framer-motion'
 
 import eventsData from '../../Data/PreviousEventsData'
 import PreviousEvents from './PreviousEvents'
 import '../../../sass/pages/history.scss'
 
-function History() {
+function History({ navShown }) {
   const events = Object.entries(eventsData)
   console.log(events)
   return (
-    <div className="history">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      // transition={{ type: 'tween', duration: 0.25 }}
+      className="history"
+      style={{ display: navShown ? 'none' : 'block' }}
+    >
       <div className="container">
         <h2>Shopping History</h2>
         {events.map(([name, event]) => {
@@ -23,7 +31,7 @@ function History() {
           )
         })}
       </div>
-    </div>
+    </motion.div>
   )
 }
 

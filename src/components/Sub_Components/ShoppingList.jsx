@@ -1,5 +1,6 @@
 import React, { useId } from 'react'
 import { nanoid } from 'nanoid'
+import { motion } from 'framer-motion'
 
 import bottle from '../../assets/source.svg'
 import Button from '../UI/Button'
@@ -8,12 +9,16 @@ import '../../sass/sub-components/shopping_list.scss'
 import shoppingData from '../Data/ShoppingItems'
 import Items from './Items'
 
-function ShoppingList({ navShown }) {
+function ShoppingList({ navShown, setAsideState }) {
   const id = useId()
 
   const { fruits, beverages, meat } = shoppingData
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ type: 'tween', duration: 0.25 }}
       className="shopping_list"
       style={{ display: navShown ? 'block' : 'none' }}
     >
@@ -22,7 +27,7 @@ function ShoppingList({ navShown }) {
           <img src={bottle} alt="add-item" />
           <div>
             <p>Didn’t find what you need?</p>
-            <Button>Add Item</Button>
+            <Button onClick={() => setAsideState('add')}>Add Item</Button>
           </div>
         </div>
         <div className="container">
@@ -56,7 +61,7 @@ function ShoppingList({ navShown }) {
           </label>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

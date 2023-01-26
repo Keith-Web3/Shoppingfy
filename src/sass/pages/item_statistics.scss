@@ -1,0 +1,26 @@
+@use '../variables' as v;
+
+.item-statistics {
+  font-family: 'Quicksand', 'Nunito', Verdana, Geneva, Tahoma, sans-serif;
+  display: grid;
+  grid-template: repeat(2, 1fr) / repeat(2, auto);
+  grid-template-areas: 'name percentage' 'progress progress';
+  width: 100%;
+
+  .name {
+    grid-area: name;
+    font-weight: 600;
+    margin-bottom: v.$spacer * 0.3;
+  }
+  .percentage {
+    grid-area: percentage;
+    font-weight: 600;
+    text-align: end;
+  }
+  .progress {
+    grid-area: progress;
+    height: 6px;
+    border-radius: 4px;
+    margin-top: v.$spacer * 0.7;
+  }
+}

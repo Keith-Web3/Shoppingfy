@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import logo from '../../assets/logo.svg'
 import cart from '../../assets/cart.svg'
@@ -13,9 +14,15 @@ function NavBar({ setNavShown }) {
     <nav className="navigation">
       <img src={logo} alt="logo" className="logo" />
       <div className="pages">
-        <img src={list} alt="list" title="items" />
-        <img src={rotate} alt="history" title="history" />
-        <img src={poll} alt="statistics" title="statistics" />
+        <Link to="/">
+          <img src={list} alt="list" title="items" />
+        </Link>
+        <Link to="/history">
+          <img src={rotate} alt="history" title="history" />
+        </Link>
+        <Link to="/statistics">
+          <img src={poll} alt="statistics" title="statistics" />
+        </Link>
       </div>
       <div className="cart" onClick={() => setNavShown(prev => !prev)}>
         <p>{cartCount}</p>

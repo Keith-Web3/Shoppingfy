@@ -1,0 +1,51 @@
+@use '../variables' as v;
+
+.previous-events {
+  font-family: 'Quicksand', 'Nunito', Verdana, Geneva, Tahoma, sans-serif;
+  padding: v.$spacer;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  margin-bottom: v.$spacer;
+  cursor: pointer;
+
+  @include v.flexbox($justify: start, $gap: v.$spacer * 2);
+  @media (max-width: 600px) {
+    flex-wrap: wrap;
+    .name {
+      width: 100%;
+    }
+    img:last-child {
+      display: none;
+    }
+  }
+  img {
+    width: 20px;
+  }
+  .name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-right: auto;
+  }
+  .date {
+    color: #c1c1c4;
+    font-weight: 500;
+    min-width: 107px;
+  }
+  .status {
+    min-width: 99px;
+    p {
+      $color: #56ccf2;
+
+      color: #56ccf2;
+      border: 1px solid #56ccf2;
+      border-radius: 8px;
+      padding: v.$spacer * 0.5;
+
+      &.cancelled {
+        color: #eb5757;
+        border: 1px solid #eb5757;
+      }
+    }
+  }
+}

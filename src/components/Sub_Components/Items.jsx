@@ -4,15 +4,16 @@ import { useState } from 'react'
 import check from '../../assets/check-solid.svg'
 import '../../sass/sub-components/items.scss'
 
-function Items({ item }) {
-  const [itemCount, setItemCount] = useState(1)
-
+function Items({ item, itemCount }) {
+  const [selected, setSelected] = useState(false)
   return (
     <div className="items">
-      <div className="checkbox">
-        <img src={check} alt="check" />
+      <div className="checkbox" onClick={() => setSelected(prev => !prev)}>
+        {selected && <img src={check} alt="check" />}
       </div>
-      <p>{item}</p>
+      <p style={{ textDecoration: selected ? 'line-through' : 'none' }}>
+        {item}
+      </p>
       <p className="item-count">{itemCount} pcs</p>
     </div>
   )

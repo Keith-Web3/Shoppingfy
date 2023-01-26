@@ -1,6 +1,7 @@
 import React from 'react'
 import { nanoid } from 'nanoid'
 import { motion } from 'framer-motion'
+import { useSelector } from 'react-redux'
 
 import eventsData from '../../Data/PreviousEventsData'
 import PreviousEvents from './PreviousEvents'
@@ -8,6 +9,7 @@ import '../../../sass/pages/history.scss'
 
 function History({ navShown }) {
   const events = Object.entries(eventsData)
+  const state = useSelector(state => state.events)
   console.log(events)
   return (
     <motion.div

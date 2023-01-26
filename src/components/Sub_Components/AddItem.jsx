@@ -6,6 +6,7 @@ import Input from '../UI/Input'
 import '../../sass/sub-components/add_item.scss'
 import Button from '../UI/Button'
 import cancel from '../../assets/xmark-solid.svg'
+import { useSelector } from 'react-redux'
 
 function AddItem({ navShown, setAsideState, setNewItem }) {
   const dropDownRef = useRef()
@@ -14,7 +15,7 @@ function AddItem({ navShown, setAsideState, setNewItem }) {
   const imageRef = useRef()
   const categoryRef = useRef()
 
-  const [category, setCategory] = useState('')
+  const state = useSelector(state => Object.keys(state.items))
 
   const dropDownSelect = function (e) {
     const options = dropDownRef.current.children
@@ -88,11 +89,11 @@ function AddItem({ navShown, setAsideState, setNewItem }) {
           <img src={cancel} alt="cancel" />
         </Input>
         <div className="drop-down" ref={dropDownRef}>
-          <p onClick={dropDownSelect}>Fruits and vegetables</p>
-          <p onClick={dropDownSelect} className="active">
-            Meat and Fish
-          </p>
-          <p onClick={dropDownSelect}>Beverages</p>
+          {state.map(item => (
+            <p key={nanoid()} onClick={dropDownSelect}>
+              {item}
+            </p>
+          ))}
         </div>
         <div className="button-container">
           <Button

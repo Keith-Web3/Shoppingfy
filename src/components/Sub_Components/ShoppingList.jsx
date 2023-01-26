@@ -1,18 +1,19 @@
 import React, { useId } from 'react'
 import { nanoid } from 'nanoid'
 import { motion } from 'framer-motion'
+import { useSelector } from 'react-redux'
 
 import bottle from '../../assets/source.svg'
 import Button from '../UI/Button'
 import pen from '../../assets/pen-solid.svg'
 import '../../sass/sub-components/shopping_list.scss'
-import shoppingData from '../Data/ShoppingItems'
 import Items from './Items'
 
 function ShoppingList({ navShown, setAsideState }) {
   const id = useId()
 
-  const { fruits, beverages, meat } = shoppingData
+  const state = useSelector(state => Object.entries(state.items))
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -35,24 +36,20 @@ function ShoppingList({ navShown, setAsideState }) {
             <p>Shopping list</p>
             <img src={pen} alt="add-item" />
           </div>
-          <div className="items-container">
-            <h3>Fruits and vegetables</h3>
-            {fruits.map(item => (
-              <Items key={nanoid()} item={item} />
-            ))}
-          </div>
-          <div className="items-container">
-            <h3>Meat and Fish</h3>
-            {meat.map(item => (
-              <Items key={nanoid()} item={item} />
-            ))}
-          </div>
-          <div className="items-container">
-            <h3>Beverages</h3>
-            {beverages.map(item => (
-              <Items key={nanoid()} item={item} />
-            ))}
-          </div>
+          {state.map(item => {
+            return (
+              <div key={nanoid()} className="items-container">
+                <h3>{item[0]}</h3>
+                {item[1].map(item => (
+                  <Items
+                    key={nanoid()}
+                    item={item.item}
+                    itemCount={item.count}
+                  />
+                ))}
+              </div>
+            )
+          })}
         </div>
         <div className="input">
           <label htmlFor={id}>

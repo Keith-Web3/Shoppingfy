@@ -1,12 +1,22 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { useDispatch } from 'react-redux'
 
+import actions from '../Store/index'
 import '../../sass/sub-components/item_preview.scss'
 import Button from '../UI/Button'
 import backArrow from '../../assets/arrow-left.svg'
-import placeHolderImg from '../../assets/brooke-lark-oaz0raysASk-unsplash.jpg'
 
 function ItemPreview({ navShown, newItem, setAsideState }) {
+  const dispatch = useDispatch()
+
+  const submitHandler = function () {
+    dispatch(
+      actions.addItem({ category: newItem.category, item: newItem.name })
+    )
+    setAsideState('list')
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -44,8 +54,18 @@ function ItemPreview({ navShown, newItem, setAsideState }) {
           choice.`}
         </p>
         <div className="btn-container">
-          <Button style={{ bg: 'transparent' }}>delete</Button>
-          <Button style={{ bg: '#F9A109', color: '#fff' }}>Add to list</Button>
+          <Button
+            onClick={() => setAsideState('list')}
+            style={{ bg: 'transparent' }}
+          >
+            delete
+          </Button>
+          <Button
+            onClick={submitHandler}
+            style={{ bg: '#F9A109', color: '#fff' }}
+          >
+            Add to list
+          </Button>
         </div>
       </div>
     </motion.div>

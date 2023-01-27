@@ -2,36 +2,36 @@ import { createSlice, configureStore } from '@reduxjs/toolkit'
 
 const initialItems = {
   'Fruits and vegetables': [
-    { item: 'Avocado', count: 1 },
-    { item: 'Banana', count: 1 },
-    { item: 'Bunch of carrots 5pcs', count: 1 },
-    { item: 'Chicken 1kg', count: 1 },
-    { item: 'Pre-cooked corn 450g', count: 1 },
-    { item: 'Mandarin Nadorcott', count: 1 },
-    { item: 'Piele De Sapo Melon', count: 1 },
-    { item: 'Watermelon', count: 1 },
+    { item: 'Avocado', count: 0 },
+    { item: 'Banana', count: 0 },
+    { item: 'Bunch of carrots 5pcs', count: 0 },
+    { item: 'Chicken 1kg', count: 0 },
+    { item: 'Pre-cooked corn 450g', count: 0 },
+    { item: 'Mandarin Nadorcott', count: 0 },
+    { item: 'Piele De Sapo Melon', count: 0 },
+    { item: 'Watermelon', count: 0 },
   ],
   'Meat and Fish': [
-    { item: 'Chicken leg box', count: 1 },
-    { item: 'Chicken 1kg', count: 1 },
-    { item: 'Pork fillets 450g', count: 1 },
-    { item: 'Salmon 1kg', count: 1 },
+    { item: 'Chicken leg box', count: 0 },
+    { item: 'Chicken 1kg', count: 0 },
+    { item: 'Pork fillets 450g', count: 0 },
+    { item: 'Salmon 1kg', count: 0 },
   ],
   Beverages: [
-    { item: 'Barley', count: 1 },
-    { item: 'Hot drinks', count: 1 },
-    { item: 'Wine', count: 1 },
-    { item: 'Cocktails', count: 1 },
-    { item: 'Cider', count: 1 },
-    { item: 'Beer', count: 1 },
-    { item: 'Chocolate', count: 1 },
-    { item: 'Mixed Drinks', count: 1 },
+    { item: 'Barley', count: 0 },
+    { item: 'Hot drinks', count: 0 },
+    { item: 'Wine', count: 0 },
+    { item: 'Cocktails', count: 0 },
+    { item: 'Cider', count: 0 },
+    { item: 'Beer', count: 0 },
+    { item: 'Chocolate', count: 0 },
+    { item: 'Mixed Drinks', count: 0 },
   ],
   Pet: [
-    { item: 'Chicken', count: 1 },
-    { item: 'Pork', count: 1 },
-    { item: 'Whole grain', count: 1 },
-    { item: 'Hamster Feed', count: 1 },
+    { item: 'Chicken', count: 0 },
+    { item: 'Pork', count: 0 },
+    { item: 'Whole grain', count: 0 },
+    { item: 'Hamster Feed', count: 0 },
   ],
 }
 
@@ -53,7 +53,7 @@ const itemsSlice = createSlice({
         } else {
           state[payload.category] = [
             ...state[payload.category],
-            { item: payload.item, count: 1 },
+            { item: payload.item, count: 0 },
           ]
         }
       } else {

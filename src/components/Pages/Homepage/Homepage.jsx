@@ -25,7 +25,7 @@ function Homepage({ navShown }) {
         <section>
           {state.map(item => {
             return (
-              <div>
+              <div key={nanoid()}>
                 <h2>{item[0]}</h2>
                 {item[1].map(data => (
                   <Item

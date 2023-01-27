@@ -21,7 +21,7 @@ function App() {
   return (
     <main>
       <AnimatePresence>
-        <NavBar navShown={navShown} setNavShown={setNavShown} />
+        <NavBar navShown={navShown} setNavShown={setNavShown} key={nanoid()} />
         <Routes location={location} key={location.path}>
           <Route
             path="/"

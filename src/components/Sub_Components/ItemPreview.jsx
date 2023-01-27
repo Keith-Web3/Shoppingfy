@@ -34,7 +34,7 @@ function ItemPreview({ navShown, newItem, setAsideState }) {
         <img
           src={
             newItem.url ||
-            `https://source.unsplash.com/random/?food,${newItem.name.replace(
+            `https://source.unsplash.com/random/?${newItem.name.replace(
               ' ',
               ','
             )}} alt="food image" className="placeholder`

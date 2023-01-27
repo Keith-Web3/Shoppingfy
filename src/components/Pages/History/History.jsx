@@ -11,13 +11,11 @@ function History({ navShown }) {
   const events = Object.entries(eventsData)
   const state = useSelector(state => Object.entries(state.events))
 
-  console.log(state)
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      // transition={{ type: 'tween', duration: 0.25 }}
       className="history"
       style={{ display: navShown ? 'none' : 'block' }}
     >

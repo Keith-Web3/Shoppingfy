@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 import actions from '../Store/index'
 import bottle from '../../assets/source.svg'
+import shopper from '../../assets/shopping_app.svg'
 import Button from '../UI/Button'
 import pen from '../../assets/pen-solid.svg'
 import '../../sass/sub-components/shopping_list.scss'
@@ -18,8 +19,10 @@ function ShoppingList({ navShown, setAsideState }) {
   const dispatch = useDispatch()
 
   const state = useSelector(state => Object.entries(state.items))
+  const cartIsEmpty = state.every(el => el[1].every(item => item.count === 0))
 
   const submitHandler = function () {
+    if (cartIsEmpty) return
     if (inputRef.current.value.trim()) {
       const date = new Date()
       const day = new Intl.DateTimeFormat(['en', 'GB']).format(date).split('/')
@@ -59,6 +62,7 @@ function ShoppingList({ navShown, setAsideState }) {
             <Button onClick={() => setAsideState('add')}>Add Item</Button>
           </div>
         </div>
+        {cartIsEmpty && <p className="no-items">No items</p>}
         <div className="container">
           <div className="heading">
             <p>Shopping list</p>
@@ -68,28 +72,36 @@ function ShoppingList({ navShown, setAsideState }) {
             return (
               <div key={nanoid()} className="items-container">
                 <h3>{item[0]}</h3>
-                {item[1].map(item => (
-                  <Items
-                    key={nanoid()}
-                    item={item.item}
-                    itemCount={item.count}
-                  />
-                ))}
+                {item[1].map(item => {
+                  if (item.count === 0) return
+                  return (
+                    <Items
+                      key={nanoid()}
+                      item={item.item}
+                      itemCount={item.count}
+                    />
+                  )
+                })}
               </div>
             )
           })}
         </div>
-        <div className="input">
+        <div className={`input ${cartIsEmpty ? 'empty' : ''}`}>
+          {cartIsEmpty && <img src={shopper} alt="shopper" />}
           <label htmlFor={id}>
             <input
               type="text"
               id={id}
               placeholder="Enter a name"
               ref={inputRef}
+              disabled={cartIsEmpty}
             />
             <Button
               onClick={submitHandler}
-              style={{ bg: '#F9A109', color: '#FFFFFF' }}
+              style={{
+                bg: cartIsEmpty ? '#C1C1C4' : '#F9A109',
+                color: '#FFFFFF',
+              }}
             >
               Save
             </Button>

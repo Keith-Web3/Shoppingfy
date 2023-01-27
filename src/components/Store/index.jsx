@@ -2,36 +2,36 @@ import { createSlice, configureStore } from '@reduxjs/toolkit'
 
 const initialItems = {
   'Fruits and vegetables': [
-    { item: 'Avocado', count: 0 },
-    { item: 'Banana', count: 0 },
-    { item: 'Bunch of carrots 5pcs', count: 0 },
-    { item: 'Chicken 1kg', count: 0 },
-    { item: 'Pre-cooked corn 450g', count: 0 },
-    { item: 'Mandarin Nadorcott', count: 0 },
-    { item: 'Piele De Sapo Melon', count: 0 },
-    { item: 'Watermelon', count: 0 },
+    { item: 'Avocado', count: 0, checked: false },
+    { item: 'Banana', count: 0, checked: false },
+    { item: 'Bunch of carrots 5pcs', count: 0, checked: false },
+    { item: 'Chicken 1kg', count: 0, checked: false },
+    { item: 'Pre-cooked corn 450g', count: 0, checked: false },
+    { item: 'Mandarin Nadorcott', count: 0, checked: false },
+    { item: 'Piele De Sapo Melon', count: 0, checked: false },
+    { item: 'Watermelon', count: 0, checked: false },
   ],
   'Meat and Fish': [
-    { item: 'Chicken leg box', count: 0 },
-    { item: 'Chicken 1kg', count: 0 },
-    { item: 'Pork fillets 450g', count: 0 },
-    { item: 'Salmon 1kg', count: 0 },
+    { item: 'Chicken leg box', count: 0, checked: false },
+    { item: 'Chicken 1kg', count: 0, checked: false },
+    { item: 'Pork fillets 450g', count: 0, checked: false },
+    { item: 'Salmon 1kg', count: 0, checked: false },
   ],
   Beverages: [
-    { item: 'Barley', count: 0 },
-    { item: 'Hot drinks', count: 0 },
-    { item: 'Wine', count: 0 },
-    { item: 'Cocktails', count: 0 },
-    { item: 'Cider', count: 0 },
-    { item: 'Beer', count: 0 },
-    { item: 'Chocolate', count: 0 },
-    { item: 'Mixed Drinks', count: 0 },
+    { item: 'Barley', count: 0, checked: false },
+    { item: 'Hot drinks', count: 0, checked: false },
+    { item: 'Wine', count: 0, checked: false },
+    { item: 'Cocktails', count: 0, checked: false },
+    { item: 'Cider', count: 0, checked: false },
+    { item: 'Beer', count: 0, checked: false },
+    { item: 'Chocolate', count: 0, checked: false },
+    { item: 'Mixed Drinks', count: 0, checked: false },
   ],
   Pet: [
-    { item: 'Chicken', count: 0 },
-    { item: 'Pork', count: 0 },
-    { item: 'Whole grain', count: 0 },
-    { item: 'Hamster Feed', count: 0 },
+    { item: 'Chicken', count: 0, checked: false },
+    { item: 'Pork', count: 0, checked: false },
+    { item: 'Whole grain', count: 0, checked: false },
+    { item: 'Hamster Feed', count: 0, checked: false },
   ],
 }
 
@@ -58,6 +58,26 @@ const itemsSlice = createSlice({
         }
       } else {
         state[payload.category] = [payload.item]
+      }
+    },
+    removeItem(state, { payload }) {
+      const idx = state[payload.category].findIndex(
+        item => item.item === payload.item
+      )
+
+      state[payload.category][idx] = {
+        item: payload.item,
+        count: state[payload.category][idx].count - 1,
+      }
+    },
+    toggleChecked(state, { payload }) {
+      const idx = state[payload.category].findIndex(
+        item => item.item === payload.item
+      )
+
+      state[payload.category][idx] = {
+        ...state[payload.category][idx],
+        checked: !state[payload.category][idx].checked,
       }
     },
   },

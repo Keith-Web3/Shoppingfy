@@ -79,6 +79,8 @@ function ShoppingList({ navShown, setAsideState }) {
                       key={nanoid()}
                       item={item.item}
                       itemCount={item.count}
+                      selected={item.checked}
+                      toggleSelect={item.checkToggle}
                     />
                   )
                 })}

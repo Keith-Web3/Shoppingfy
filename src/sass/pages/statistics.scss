@@ -3,7 +3,7 @@
 .statistics {
   font-family: 'Quicksand', 'Nunito', Verdana, Geneva, Tahoma, sans-serif;
   grid-area: main;
-  padding: v.$spacer;
+  padding: v.$spacer v.$spacer * 2;
   height: 100%;
 
   @media (min-width: 750px) {

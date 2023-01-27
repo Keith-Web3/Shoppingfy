@@ -1,4 +1,7 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit'
+import storage from 'redux-persist/lib/storage'
+import { persistReducer } from 'redux-persist'
+import { combineReducers } from '@reduxjs/toolkit'
 
 const initialItems = {
   'Fruits and vegetables': [
@@ -118,8 +121,21 @@ const eventsSlice = createSlice({
   },
 })
 
+const persistConfig = {
+  key: 'root',
+  version: 1,
+  storage,
+}
+
+const reducer = combineReducers({
+  items: itemsSlice.reducer,
+  events: eventsSlice.reducer,
+})
+
+const persistedReducer = persistReducer(persistConfig, reducer)
+
 export default { items: itemsSlice.actions, events: eventsSlice.actions }
 
 export const store = configureStore({
-  reducer: { items: itemsSlice.reducer, events: eventsSlice.reducer },
+  reducer: persistedReducer,
 })

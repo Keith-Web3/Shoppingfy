@@ -22,6 +22,18 @@
   label {
     position: relative;
     width: max-content;
+    &::after {
+      content: 'Search functionality still in progress 😉';
+      position: absolute;
+      display: none;
+      width: 100%;
+      color: #3f3d56;
+    }
+    &:has(input:focus) {
+      &::after {
+        display: unset;
+      }
+    }
 
     img {
       position: absolute;

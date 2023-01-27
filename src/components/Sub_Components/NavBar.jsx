@@ -12,7 +12,10 @@ import '../../sass/sub-components/navbar.scss'
 function NavBar({ setNavShown }) {
   const cartCount = useSelector(state => {
     const entries = Object.entries(state.items)
-    return entries.filter(el => el[1].some(items => items.count !== 0)).length
+    return entries
+      .map(el => el[1].map(items => items.count !== 0))
+      .flat()
+      .filter(item => item).length
   })
   return (
     <nav className="navigation">

@@ -5,9 +5,17 @@ import chevron from '../../../assets/chevron.svg'
 import calender from '../../../assets/date.svg'
 import '../../../sass/pages/previous_events.scss'
 
-function PreviousEvents({ name, status, date }) {
+function PreviousEvents({ name, status, date, id, setClickedEvent }) {
   return (
-    <div className="previous-events">
+    <div
+      className="previous-events"
+      onClick={e => {
+        setClickedEvent([
+          id,
+          e.currentTarget.parentElement.firstElementChild.textContent,
+        ])
+      }}
+    >
       <p className="name">{name}</p>
       <img src={calender} alt="calender" />
       <p className="date">{date}</p>

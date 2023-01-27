@@ -2,7 +2,7 @@ import React, { useId, useRef } from 'react'
 import { nanoid } from 'nanoid'
 import { motion } from 'framer-motion'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import actions from '../Store/index'
 import bottle from '../../assets/source.svg'
@@ -12,7 +12,12 @@ import pen from '../../assets/pen-solid.svg'
 import '../../sass/sub-components/shopping_list.scss'
 import Items from './Items'
 
-function ShoppingList({ navShown, setAsideState }) {
+function ShoppingList({
+  navShown,
+  setAsideState,
+  clickedEvent,
+  setClickedEvent,
+}) {
   const id = useId()
   const navigate = useNavigate()
   const inputRef = useRef()
@@ -39,6 +44,7 @@ function ShoppingList({ navShown, setAsideState }) {
           state: 'pending',
           name: inputRef.current.value,
           date: `${monthL.slice(0, -1)} ${day[2]}`,
+          id: Date.now(),
         })
       )
       navigate('/history')
@@ -90,24 +96,58 @@ function ShoppingList({ navShown, setAsideState }) {
         </div>
         <div className={`input ${cartIsEmpty ? 'empty' : ''}`}>
           {cartIsEmpty && <img src={shopper} alt="shopper" />}
-          <label htmlFor={id}>
-            <input
-              type="text"
-              id={id}
-              placeholder="Enter a name"
-              ref={inputRef}
-              disabled={cartIsEmpty}
-            />
-            <Button
-              onClick={submitHandler}
-              style={{
-                bg: cartIsEmpty ? '#C1C1C4' : '#F9A109',
-                color: '#FFFFFF',
-              }}
-            >
-              Save
-            </Button>
-          </label>
+          {!clickedEvent.length ? (
+            <label htmlFor={id}>
+              <input
+                type="text"
+                id={id}
+                placeholder="Enter a name"
+                ref={inputRef}
+                disabled={cartIsEmpty}
+              />
+              <Button
+                onClick={submitHandler}
+                style={{
+                  bg: cartIsEmpty ? '#C1C1C4' : '#F9A109',
+                  color: '#FFFFFF',
+                }}
+              >
+                Save
+              </Button>
+            </label>
+          ) : (
+            <label htmlFor={`a${id}`} className="btn-container">
+              <Button
+                onClick={() => {
+                  dispatch(
+                    actions.events.editStatus({
+                      id: clickedEvent[0],
+                      status: 'cancelled',
+                      date: clickedEvent[1],
+                    })
+                  )
+                  setClickedEvent('')
+                }}
+              >
+                cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  dispatch(
+                    actions.events.editStatus({
+                      id: clickedEvent[0],
+                      status: 'completed',
+                      date: clickedEvent[1],
+                    })
+                  )
+                  setClickedEvent('')
+                }}
+                style={{ bg: '#56CCF2', color: '#fff' }}
+              >
+                Complete
+              </Button>
+            </label>
+          )}
         </div>
       </div>
     </motion.div>

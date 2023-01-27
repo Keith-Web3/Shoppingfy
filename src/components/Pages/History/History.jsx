@@ -7,9 +7,11 @@ import eventsData from '../../Data/PreviousEventsData'
 import PreviousEvents from './PreviousEvents'
 import '../../../sass/pages/history.scss'
 
-function History({ navShown }) {
+function History({ navShown, setClickedEvent }) {
   const events = Object.entries(eventsData)
   const state = useSelector(state => Object.entries(state.events))
+  const state1 = useSelector(state => state.events)
+  console.log(state1)
 
   return (
     <motion.div
@@ -26,7 +28,11 @@ function History({ navShown }) {
             <div key={nanoid()}>
               <h3>{name}</h3>
               {event.map(el => (
-                <PreviousEvents key={nanoid()} {...el} />
+                <PreviousEvents
+                  setClickedEvent={setClickedEvent}
+                  key={nanoid()}
+                  {...el}
+                />
               ))}
             </div>
           )

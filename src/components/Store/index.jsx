@@ -91,13 +91,29 @@ const eventsSlice = createSlice({
       if (state[payload.date]) {
         state[payload.date] = [
           ...state[payload.date],
-          { name: payload.name, date: payload.day, status: payload.state },
+          {
+            name: payload.name,
+            date: payload.day,
+            status: payload.state,
+            id: payload.id,
+          },
         ]
       } else {
         state[payload.date] = [
-          { name: payload.name, date: payload.day, status: payload.state },
+          {
+            name: payload.name,
+            date: payload.day,
+            status: payload.state,
+            id: payload.id,
+          },
         ]
       }
+    },
+    editStatus(state, { payload }) {
+      state[payload.date] = state[payload.date].map(item => {
+        if (item.id !== payload.id) return item
+        return { ...item, status: payload.status }
+      })
     },
   },
 })

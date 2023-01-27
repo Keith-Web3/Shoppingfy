@@ -3,15 +3,12 @@ import { nanoid } from 'nanoid'
 import { motion } from 'framer-motion'
 import { useSelector } from 'react-redux'
 
-import eventsData from '../../Data/PreviousEventsData'
+import video from '../../../assets/video.mp4'
 import PreviousEvents from './PreviousEvents'
 import '../../../sass/pages/history.scss'
 
 function History({ navShown, setClickedEvent }) {
-  const events = Object.entries(eventsData)
   const state = useSelector(state => Object.entries(state.events))
-  const state1 = useSelector(state => state.events)
-  console.log(state1)
 
   return (
     <motion.div
@@ -23,6 +20,10 @@ function History({ navShown, setClickedEvent }) {
     >
       <div className="container">
         <h2>Shopping History</h2>
+        <div className="video-container">
+          <p>How to add events to history</p>
+          <video src={video} controls />
+        </div>
         {state.map(([name, event]) => {
           return (
             <div key={nanoid()}>

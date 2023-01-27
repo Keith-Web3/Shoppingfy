@@ -15,6 +15,22 @@
   h2 {
     font-family: 1.45rem;
     margin-bottom: v.$spacer * 1.25;
+
+    &:only-child + .video-container {
+      display: block;
+    }
+  }
+  .video-container {
+    display: none;
+    p {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: v.$spacer;
+    }
+    video {
+      width: 100%;
+      display: block;
+    }
   }
   h3 {
     margin-bottom: v.$spacer;

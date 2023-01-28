@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Navigate, Routes, Route } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
@@ -11,8 +11,9 @@ import AddItem from './components/Sub_Components/AddItem'
 import ItemPreview from './components/Sub_Components/ItemPreview'
 import NavBar from './components/Sub_Components/NavBar'
 import ShoppingList from './components/Sub_Components/ShoppingList'
-import { useEffect } from 'react'
+
 let timeOut
+
 function App() {
   const [navShown, setNavShown] = useState(false)
   const [asideState, setAsideState] = useState('list')

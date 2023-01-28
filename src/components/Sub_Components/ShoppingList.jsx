@@ -2,7 +2,7 @@ import React, { useId, useRef } from 'react'
 import { nanoid } from 'nanoid'
 import { motion } from 'framer-motion'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import actions from '../Store/index'
 import bottle from '../../assets/source.svg'

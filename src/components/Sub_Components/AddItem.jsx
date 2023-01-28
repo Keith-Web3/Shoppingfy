@@ -1,12 +1,12 @@
-import React, { useState, useRef } from 'react'
+import React, { useRef } from 'react'
 import { motion } from 'framer-motion'
 import { nanoid } from 'nanoid'
+import { useSelector } from 'react-redux'
 
 import Input from '../UI/Input'
 import '../../sass/sub-components/add_item.scss'
 import Button from '../UI/Button'
 import cancel from '../../assets/xmark-solid.svg'
-import { useSelector } from 'react-redux'
 
 function AddItem({ navShown, setAsideState, setNewItem }) {
   const dropDownRef = useRef()

@@ -12,7 +12,7 @@ import ItemPreview from './components/Sub_Components/ItemPreview'
 import NavBar from './components/Sub_Components/NavBar'
 import ShoppingList from './components/Sub_Components/ShoppingList'
 import { useEffect } from 'react'
-
+let timeOut
 function App() {
   const [navShown, setNavShown] = useState(false)
   const [asideState, setAsideState] = useState('list')
@@ -23,6 +23,13 @@ function App() {
   useEffect(() => {
     setNavShown(false)
   }, [location])
+
+  document.body.addEventListener('click', e => {
+    if (!e.target.closest('.btn-container')) {
+      if (e.target.closest('.previous-events')) return
+      clickedEvent.length ? setClickedEvent([]) : null
+    }
+  })
 
   return (
     <main>

@@ -126,7 +126,7 @@ function ShoppingList({
                       date: clickedEvent[1],
                     })
                   )
-                  setClickedEvent('')
+                  setClickedEvent([])
                 }}
               >
                 cancel
@@ -140,7 +140,7 @@ function ShoppingList({
                       date: clickedEvent[1],
                     })
                   )
-                  setClickedEvent('')
+                  setClickedEvent([])
                 }}
                 style={{ bg: '#56CCF2', color: '#fff' }}
               >

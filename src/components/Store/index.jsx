@@ -56,7 +56,7 @@ const itemsSlice = createSlice({
         } else {
           state[payload.category] = [
             ...state[payload.category],
-            { item: payload.item, count: 0 },
+            { item: payload.item, count: 0, checked: false },
           ]
         }
       } else {

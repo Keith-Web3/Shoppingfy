@@ -8,7 +8,9 @@ import { persistStore } from 'redux-persist'
 
 import App from './App'
 import './sass/index.scss'
+
 const persistor = persistStore(store)
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>

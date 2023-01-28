@@ -1,8 +1,10 @@
-import React, { useRef } from 'react'
+import React, { useRef, useId } from 'react'
 import { motion } from 'framer-motion'
 import { nanoid } from 'nanoid'
 import { useSelector } from 'react-redux'
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 
+import { storage } from '../Data/firebase'
 import Input from '../UI/Input'
 import '../../sass/sub-components/add_item.scss'
 import Button from '../UI/Button'
@@ -15,7 +17,11 @@ function AddItem({ navShown, setAsideState, setNewItem }) {
   const imageRef = useRef()
   const categoryRef = useRef()
 
+  const id = useId()
+
   const state = useSelector(state => Object.keys(state.items))
+
+  const storageRef = ref(storage, 'practise')
 
   const dropDownSelect = function (e) {
     const options = dropDownRef.current.children
@@ -38,7 +44,31 @@ function AddItem({ navShown, setAsideState, setNewItem }) {
       note: noteRef.current.value,
       category: categoryRef.current.value,
     })
+    imageRef.current.readOnly = false
+
     setAsideState('final')
+  }
+
+  const onUpload = async function (e) {
+    const file = e.target.files[0]
+
+    console.log(file)
+    if (file.type.slice(0, 5) !== 'image') {
+      console.error('The selected file is not an image')
+      return
+    }
+    imageRef.current.readOnly = true
+    try {
+      const uploadTask = await uploadBytes(storageRef, file)
+
+      console.log(uploadTask)
+
+      const downloadUrl = await getDownloadURL(uploadTask.ref)
+      imageRef.current.value = downloadUrl
+    } catch (err) {
+      console.log(file)
+      console.dir(err)
+    }
   }
 
   return (
@@ -70,7 +100,12 @@ function AddItem({ navShown, setAsideState, setNewItem }) {
           key={nanoid()}
           label="Image (optional)"
           placeholder="Enter a url"
-        />
+        >
+          <label htmlFor={id} className="upload">
+            Or upload an image
+            <input type="file" id={id} onChange={onUpload} />
+          </label>
+        </Input>
         <Input
           key={nanoid()}
           ref={categoryRef}
@@ -97,7 +132,10 @@ function AddItem({ navShown, setAsideState, setNewItem }) {
         </div>
         <div className="button-container">
           <Button
-            onClick={() => setAsideState('list')}
+            onClick={() => {
+              setAsideState('list')
+              imageRef.current.readOnly = false
+            }}
             style={{ bg: 'transparent' }}
           >
             cancel

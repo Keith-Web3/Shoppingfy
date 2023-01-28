@@ -3,7 +3,9 @@ import { nanoid } from 'nanoid'
 import { motion } from 'framer-motion'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { setDoc, doc } from 'firebase/firestore'
 
+import { database } from '../Data/firebase'
 import actions from '../Store/index'
 import bottle from '../../assets/source.svg'
 import shopper from '../../assets/shopping_app.svg'
@@ -26,7 +28,7 @@ function ShoppingList({
   const state = useSelector(state => Object.entries(state.items))
   const cartIsEmpty = state.every(el => el[1].every(item => item.count === 0))
 
-  const submitHandler = function () {
+  const submitHandler = async function () {
     if (cartIsEmpty) return
     if (inputRef.current.value.trim()) {
       const date = new Date()
@@ -38,15 +40,35 @@ function ShoppingList({
         .format(date)
         .split(' ')
 
+      const id = Date.now()
       dispatch(
         actions.events.addEvent({
           day: `${week} ${day.join('.')}`,
           state: 'pending',
           name: inputRef.current.value,
           date: `${monthL.slice(0, -1)} ${day[2]}`,
-          id: Date.now(),
+          id,
         })
       )
+
+      const selectedItems = state
+        .map(([category, data]) => {
+          const selectedData = data.filter(item => item.count > 0)
+          if (selectedData.length) return [category, selectedData]
+          return []
+        })
+        .filter(el => el.length !== 0)
+
+      try {
+        const res = await setDoc(doc(database, 'selectedItems', `${id}`), {
+          name: inputRef.current.value,
+          day: `${week} ${day.join('.')}`,
+          ...Object.fromEntries(selectedItems),
+        })
+      } catch (err) {
+        console.log(err.message)
+      }
+
       navigate('/history')
     }
   }

@@ -11,6 +11,7 @@ import AddItem from './components/Sub_Components/AddItem'
 import ItemPreview from './components/Sub_Components/ItemPreview'
 import NavBar from './components/Sub_Components/NavBar'
 import ShoppingList from './components/Sub_Components/ShoppingList'
+import EventInfo from './components/Pages/History/EventInfo'
 
 let timeOut
 
@@ -24,13 +25,13 @@ function App() {
   useEffect(() => {
     setNavShown(false)
   }, [location])
-
-  document.body.addEventListener('click', e => {
-    if (!e.target.closest('.btn-container')) {
-      if (e.target.closest('.previous-events')) return
-      clickedEvent.length ? setClickedEvent([]) : null
-    }
-  })
+  // document.body.addEventListener('click', e => {
+  //   if (!e.target.closest('.btn-container')) {
+  //     if (e.target.closest('.previous-events')) return
+  //     console.log(clickedEvent)
+  //     clickedEvent.length ? setClickedEvent([]) : null
+  //   }
+  // })
 
   return (
     <main>
@@ -47,6 +48,7 @@ function App() {
               <History setClickedEvent={setClickedEvent} navShown={navShown} />
             }
           />
+          <Route path="/history/:id" element={<EventInfo />} />
           <Route
             path="/statistics"
             element={<Statistics navShown={navShown} />}

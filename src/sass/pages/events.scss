@@ -1,0 +1,18 @@
+@use '../variables' as v;
+
+.event {
+  @include v.flexbox($align: start, $justify: space-between);
+
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  background-color: #fff;
+  padding: v.$spacer;
+  width: 100%;
+
+  &__count {
+    color: #f9a10a;
+  }
+  &__item {
+    font-weight: 600;
+  }
+}

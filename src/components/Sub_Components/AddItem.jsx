@@ -113,10 +113,10 @@ function AddItem({ navShown, setAsideState, setNewItem }) {
           label="Category"
           readOnly={true}
           placeholder="Enter a category"
-          onFocus={() => dropDownRef.current.classList.add('visible')}
+          onFocus={() => dropDownRef.current?.classList.add('visible')}
           onBlur={() => {
             setTimeout(
-              () => dropDownRef.current.classList.remove('visible'),
+              () => dropDownRef.current?.classList.remove('visible'),
               500
             )
           }}

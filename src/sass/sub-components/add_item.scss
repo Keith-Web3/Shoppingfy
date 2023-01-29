@@ -79,5 +79,14 @@
     margin-top: v.$spacer * 2;
     @include v.flexbox;
     font-weight: 600;
+
+    button:first-child {
+      background-color: transparent;
+      box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.05);
+    }
+    button:last-child {
+      background-color: #f9a109;
+      color: #fff;
+    }
   }
 }

@@ -1,12 +1,17 @@
 import React from 'react'
+import FormTemplate from './FormTemplate'
 import { Link } from 'react-router-dom'
 
-import FormTemplate from './FormTemplate'
-
-function Login({ signUp }) {
+function Login() {
+  const footer = (
+    <div className="footer">
+      <p>Don't have an account yet? </p>
+      <Link to="/signup">Register</Link>
+    </div>
+  )
   return (
-    <FormTemplate type="Login" onSubmit={signUp}>
-      <Link to="/signup">Don't have an account? SignUp.</Link>
+    <FormTemplate button="Login" footer={footer} type="LOGIN">
+      <h1>Login</h1>
     </FormTemplate>
   )
 }

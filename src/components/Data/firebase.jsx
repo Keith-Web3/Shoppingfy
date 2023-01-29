@@ -1,7 +1,13 @@
 import { initializeApp } from 'firebase/app'
+import {
+  getAuth,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  GithubAuthProvider,
+  TwitterAuthProvider,
+} from 'firebase/auth'
 import { getStorage } from 'firebase/storage'
 import { getFirestore } from 'firebase/firestore'
-import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -16,3 +22,7 @@ const app = initializeApp(firebaseConfig)
 export const storage = getStorage(app)
 export const database = getFirestore(app)
 export const auth = getAuth(app)
+export const googleProvider = new GoogleAuthProvider()
+export const facebookProvider = new FacebookAuthProvider()
+export const githubProvider = new GithubAuthProvider()
+export const twitterProvider = new TwitterAuthProvider()

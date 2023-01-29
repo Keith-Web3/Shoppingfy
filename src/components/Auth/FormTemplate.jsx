@@ -1,76 +1,59 @@
 import React, { useRef } from 'react'
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-} from 'firebase/auth'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { motion } from 'framer-motion'
 
-import actions from '../Store/index'
-import { auth } from '../Data/firebase'
+import { submit } from '../store/AuthState'
+import emailImg from '../../assets/envelope-solid.svg'
+import passwordImg from '../../assets/lock-solid.svg'
+import logo from '../../assets/devchallenges-light.svg'
+import AuthInput from '../UI/AuthInput'
 import Button from '../UI/Button'
-import AuthInput from './AuthInput'
-import '../../sass/Auth/form_template.scss'
+import '../../sass/Auth/form-template.scss'
+import SocialProfiles from '../Utils/SocialProfiles'
 
-function FormTemplate({ type, onSubmit, children }) {
+function FormTemplate({ children, button, footer, type }) {
+  const dispatch = useDispatch()
   const emailRef = useRef()
   const passwordRef = useRef()
-  const dispatch = useDispatch()
   const navigate = useNavigate()
+  const isLoading = useSelector(state => state.isLoading)
 
-  const signUp = async function (e) {
-    e.preventDefault()
-    try {
-      const { user } = await createUserWithEmailAndPassword(
-        auth,
-        emailRef.current.value,
-        passwordRef.current.value
+  const submitHandler = function (type) {
+    return function (e) {
+      e.preventDefault()
+
+      dispatch(
+        submit({
+          type,
+          email: emailRef.current.value,
+          password: passwordRef.current.value,
+          navigate,
+          isLoading,
+        })
       )
-
-      navigate('/')
-      dispatch(actions.user.setUser({ user }))
-    } catch (err) {
-      window.alert(err.message)
     }
   }
-  const login = async function (e) {
-    e.preventDefault()
-
-    try {
-      const { user } = await signInWithEmailAndPassword(
-        auth,
-        emailRef.current.value,
-        passwordRef.current.value
-      )
-
-      navigate('/')
-      dispatch(actions.user.setUser({ user }))
-    } catch (err) {
-      window.alert(err.message)
-    }
-  }
-
   return (
-    <form
+    <motion.form
       className="form-template"
-      onSubmit={type === 'Sign Up' ? signUp : login}
+      onSubmit={submitHandler(type)}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
     >
-      <AuthInput type="email" name="email" ref={emailRef} required={true}>
-        Email:
-      </AuthInput>
-      <AuthInput
-        type="password"
-        name="password"
-        ref={passwordRef}
-        minLength={6}
-        required={true}
-      >
-        Password:
-      </AuthInput>
+      <img src={logo} alt="logo" />
       {children}
-      <Button style={{ bg: '#F9A109', color: '#fff' }}>{type}</Button>
-    </form>
+      <AuthInput type="email" img={emailImg} ref={emailRef} />
+      <AuthInput type="password" img={passwordImg} ref={passwordRef} />
+      <Button type="submit">{button}</Button>
+      <p>or continue with these social profile</p>
+      <SocialProfiles
+        eventListener={submitHandler}
+        keys={['GOOGLE', 'FACEBOOK', 'TWITTER', 'GITHUB']}
+      />
+      {footer}
+    </motion.form>
   )
 }
 

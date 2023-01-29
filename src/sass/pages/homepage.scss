@@ -2,7 +2,6 @@
 
 .homepage {
   font-family: 'Quicksand', 'Nunito', Verdana, Geneva, Tahoma, sans-serif;
-  // margin-left: auto;
   padding: v.$spacer;
   padding-left: v.$spacer * 2;
   grid-area: main;
@@ -34,9 +33,5 @@
     grid-auto-rows: auto;
     align-items: start;
     gap: v.$spacer;
-    // display: flex;
-    // align-items: start;
-    // flex-wrap: wrap;
-    // gap: v.$spacer;
   }
 }

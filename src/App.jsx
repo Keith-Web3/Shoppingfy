@@ -3,7 +3,7 @@ import { Navigate, Routes, Route } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
 import { nanoid } from 'nanoid'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import History from './components/Pages/History/history'
 import Homepage from './components/Pages/Homepage/Homepage'
@@ -15,27 +15,43 @@ import ShoppingList from './components/Sub_Components/ShoppingList'
 import EventInfo from './components/Pages/History/EventInfo'
 import SignUp from './components/Auth/SignUp'
 import Login from './components/Auth/Login'
+import Profile from './components/Profile'
+import Popup from './components/UI/Popup'
+import MainProfile from './components/Utils/MainProfile'
+import EditProfile from './components/Utils/EditProfile'
+import { actions } from './components/Store/AuthState'
+import Settings from './components/Settings'
 
-let timeOut
+let timer
 
 function App() {
   const [navShown, setNavShown] = useState(false)
   const [asideState, setAsideState] = useState('list')
   const [newItem, setNewItem] = useState({})
   const [clickedEvent, setClickedEvent] = useState([])
-  const user = useSelector(state => state.user.user)
-  console.log(user)
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
+  const errMessage = useSelector(state => state.auth.errorMessage)
   const location = useLocation()
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    if (user) setNavShown(false)
+    if (isLoggedIn) setNavShown(false)
     return
   }, [location])
+
+  useEffect(() => {
+    timer = setTimeout(() => {
+      dispatch(actions.resetErrorMessage(''))
+    }, 3100)
+
+    return () => clearTimeout(timer)
+  }, [errMessage])
 
   return (
     <main>
       <AnimatePresence>
-        {user && (
+        {errMessage && <Popup key={nanoid()} message={errMessage} />}
+        {isLoggedIn && (
           <NavBar
             navShown={navShown}
             setNavShown={setNavShown}
@@ -45,7 +61,7 @@ function App() {
         <Routes location={location} key={location.path}>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          {user && (
+          {isLoggedIn && (
             <>
               <Route
                 path="/"
@@ -53,6 +69,11 @@ function App() {
                   <Homepage navShown={navShown} setNavShown={setNavShown} />
                 }
               />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/user-details" element={<Profile />}>
+                <Route path="/user-details" element={<MainProfile />} />
+                <Route path="/user-details/edit" element={<EditProfile />} />
+              </Route>
               <Route
                 path="/history"
                 element={
@@ -71,7 +92,7 @@ function App() {
           )}
           <Route path="*" element={<Navigate to="/signup" />} />
         </Routes>
-        {user &&
+        {isLoggedIn &&
           (asideState === 'list' ? (
             <ShoppingList
               key={nanoid()}

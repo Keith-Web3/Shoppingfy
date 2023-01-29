@@ -41,13 +41,13 @@
     img {
       margin-inline: auto;
       @media (min-width: 385px) {
-        transform: translateY(-1em);
+        transform: translateY(-1.5em);
       }
     }
     p {
       color: #fff;
       font-size: 1.05rem;
-      margin-bottom: v.$spacer;
+      margin-top: v.$spacer;
     }
   }
   .no-items {
@@ -95,6 +95,10 @@
       input {
         border-color: #c1c1c4;
       }
+      button {
+        background-color: #c1c1c4;
+        // color: #000;
+      }
     }
 
     img {
@@ -109,8 +113,11 @@
     }
     button {
       position: absolute;
-      inset: 50% v.$spacer auto auto;
+      inset: 50% calc(v.$spacer + 2px) auto auto;
       transform: translateY(-50%);
+      background-color: #f9a109;
+      color: #fff;
+      margin: 0;
     }
   }
   .btn-container {
@@ -119,6 +126,16 @@
     button {
       position: unset;
       transform: unset;
+      margin: 0;
+
+      &:first-child {
+        background-color: transparent;
+        box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.05);
+      }
+      &:last-child {
+        background-color: #56ccf2;
+        color: #fff;
+      }
     }
   }
 }

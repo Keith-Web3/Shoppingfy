@@ -2,26 +2,12 @@ import React from 'react'
 
 import '../../sass/UI/button.scss'
 
-function Button({ children, onClick, style }) {
+function Button({ type, children, onClick }) {
   return (
-    <button
-      onClick={onClick}
-      className="button"
-      style={{
-        backgroundColor: style.bg,
-        color: style.color,
-      }}
-    >
+    <button type={type} className="button" onClick={onClick}>
       {children}
     </button>
   )
-}
-
-Button.defaultProps = {
-  style: {
-    bg: '#fff',
-    color: '#000',
-  },
 }
 
 export default Button

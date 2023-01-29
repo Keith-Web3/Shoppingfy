@@ -22,7 +22,7 @@ function NavBar({ setNavShown }) {
     <nav className="navigation">
       <img src={logo} alt="logo" className="logo" />
       <div className="pages">
-        <Link>
+        <Link to="/user-details">
           <img src={user} alt="user" title="user" />
         </Link>
         <Link to="/">

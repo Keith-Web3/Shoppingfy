@@ -68,7 +68,7 @@ function ShoppingList({
       } catch (err) {
         console.log(err.message)
       }
-
+      dispatch(actions.items.removeAllIems())
       navigate('/history')
     }
   }

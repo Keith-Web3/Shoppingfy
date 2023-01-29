@@ -22,9 +22,11 @@ function PreviousEvents({ name, status, date, id, setClickedEvent }) {
       <div
         className="status"
         onClick={e => {
+          e.stopPropagation()
           setClickedEvent([
             id,
-            e.currentTarget.parentElement.firstElementChild.textContent,
+            e.currentTarget.parentElement.parentElement.firstElementChild
+              .textContent,
           ])
         }}
       >

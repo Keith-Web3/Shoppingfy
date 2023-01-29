@@ -35,6 +35,11 @@
   }
   .status {
     min-width: 99px;
+    transition: transform 200ms linear;
+    &:hover {
+      transform: scale(1.05);
+    }
+
     p {
       margin-inline: auto;
       text-align: center;

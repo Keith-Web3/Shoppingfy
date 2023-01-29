@@ -18,7 +18,7 @@
     position: sticky;
     min-height: 100vh;
     padding-bottom: v.$spacer * 8;
-    top: 0;
+    top: v.$spacer;
   }
 
   @media (min-width: 385px) {

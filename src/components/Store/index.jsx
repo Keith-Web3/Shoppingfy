@@ -2,6 +2,7 @@ import { createSlice, configureStore } from '@reduxjs/toolkit'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer } from 'redux-persist'
 import { combineReducers } from '@reduxjs/toolkit'
+import { nanoid } from 'nanoid'
 
 const initialItems = {
   'Fruits and vegetables': [
@@ -71,6 +72,11 @@ const itemsSlice = createSlice({
       state[payload.category][idx] = {
         item: payload.item,
         count: state[payload.category][idx].count - 1,
+      }
+    },
+    removeAllIems(state, actions) {
+      for (const obj in state) {
+        state[obj].forEach(el => (el.count = 0))
       }
     },
     toggleChecked(state, { payload }) {

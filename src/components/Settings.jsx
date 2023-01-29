@@ -100,6 +100,7 @@ function Settings() {
           <Button
             onClick={() => {
               signOut(auth)
+              dispatch(actions.signOut())
               navigate('/login')
             }}
           >

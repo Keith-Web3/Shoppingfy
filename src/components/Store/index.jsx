@@ -127,6 +127,16 @@ const eventsSlice = createSlice({
   },
 })
 
+const userSlice = createSlice({
+  name: 'user',
+  initialState: { user: null },
+  reducers: {
+    setUser(state, { payload }) {
+      state.user = payload.user
+    },
+  },
+})
+
 const persistConfig = {
   key: 'root',
   version: 1,
@@ -136,11 +146,16 @@ const persistConfig = {
 const reducer = combineReducers({
   items: itemsSlice.reducer,
   events: eventsSlice.reducer,
+  user: userSlice.reducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, reducer)
 
-export default { items: itemsSlice.actions, events: eventsSlice.actions }
+export default {
+  items: itemsSlice.actions,
+  events: eventsSlice.actions,
+  user: userSlice.actions,
+}
 
 export const store = configureStore({
   reducer: persistedReducer,

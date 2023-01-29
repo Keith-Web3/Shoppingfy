@@ -10,6 +10,7 @@ body {
     grid-template-areas: 'nav main aside';
     align-items: start;
     max-width: 1600px;
+    min-height: 100vh;
     margin-inline: auto;
     position: relative;
   }

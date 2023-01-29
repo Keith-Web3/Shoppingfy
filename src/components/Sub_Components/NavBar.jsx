@@ -7,6 +7,7 @@ import cart from '../../assets/cart.svg'
 import list from '../../assets/list.svg'
 import poll from '../../assets/poll.svg'
 import rotate from '../../assets/rotate.svg'
+import user from '../../assets/circle-user-solid.svg'
 import '../../sass/sub-components/navbar.scss'
 
 function NavBar({ setNavShown }) {
@@ -21,6 +22,9 @@ function NavBar({ setNavShown }) {
     <nav className="navigation">
       <img src={logo} alt="logo" className="logo" />
       <div className="pages">
+        <Link>
+          <img src={user} alt="user" title="user" />
+        </Link>
         <Link to="/">
           <img src={list} alt="list" title="items" />
         </Link>

@@ -3,6 +3,7 @@ import { Navigate, Routes, Route } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
 import { nanoid } from 'nanoid'
+import { useSelector } from 'react-redux'
 
 import History from './components/Pages/History/history'
 import Homepage from './components/Pages/Homepage/Homepage'
@@ -12,6 +13,8 @@ import ItemPreview from './components/Sub_Components/ItemPreview'
 import NavBar from './components/Sub_Components/NavBar'
 import ShoppingList from './components/Sub_Components/ShoppingList'
 import EventInfo from './components/Pages/History/EventInfo'
+import SignUp from './components/Auth/SignUp'
+import Login from './components/Auth/Login'
 
 let timeOut
 
@@ -20,64 +23,78 @@ function App() {
   const [asideState, setAsideState] = useState('list')
   const [newItem, setNewItem] = useState({})
   const [clickedEvent, setClickedEvent] = useState([])
+  const user = useSelector(state => state.user.user)
+  console.log(user)
   const location = useLocation()
 
   useEffect(() => {
-    setNavShown(false)
+    if (user) setNavShown(false)
+    return
   }, [location])
-  // document.body.addEventListener('click', e => {
-  //   if (!e.target.closest('.btn-container')) {
-  //     if (e.target.closest('.previous-events')) return
-  //     console.log(clickedEvent)
-  //     clickedEvent.length ? setClickedEvent([]) : null
-  //   }
-  // })
 
   return (
     <main>
       <AnimatePresence>
-        <NavBar navShown={navShown} setNavShown={setNavShown} key={nanoid()} />
-        <Routes location={location} key={location.path}>
-          <Route
-            path="/"
-            element={<Homepage navShown={navShown} setNavShown={setNavShown} />}
-          />
-          <Route
-            path="/history"
-            element={
-              <History setClickedEvent={setClickedEvent} navShown={navShown} />
-            }
-          />
-          <Route path="/history/:id" element={<EventInfo />} />
-          <Route
-            path="/statistics"
-            element={<Statistics navShown={navShown} />}
-          />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-        {asideState === 'list' ? (
-          <ShoppingList
-            key={nanoid()}
+        {user && (
+          <NavBar
             navShown={navShown}
-            setAsideState={setAsideState}
-            clickedEvent={clickedEvent}
-            setClickedEvent={setClickedEvent}
-          />
-        ) : asideState === 'add' ? (
-          <AddItem
+            setNavShown={setNavShown}
             key={nanoid()}
-            navShown={navShown}
-            setAsideState={setAsideState}
-            setNewItem={setNewItem}
-          />
-        ) : (
-          <ItemPreview
-            setAsideState={setAsideState}
-            newItem={newItem}
-            key={nanoid()}
-            navShown={navShown}
           />
         )}
+        <Routes location={location} key={location.path}>
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          {user && (
+            <>
+              <Route
+                path="/"
+                element={
+                  <Homepage navShown={navShown} setNavShown={setNavShown} />
+                }
+              />
+              <Route
+                path="/history"
+                element={
+                  <History
+                    setClickedEvent={setClickedEvent}
+                    navShown={navShown}
+                  />
+                }
+              />
+              <Route path="/history/:id" element={<EventInfo />} />
+              <Route
+                path="/statistics"
+                element={<Statistics navShown={navShown} />}
+              />
+            </>
+          )}
+          <Route path="*" element={<Navigate to="/signup" />} />
+        </Routes>
+        {user &&
+          (asideState === 'list' ? (
+            <ShoppingList
+              key={nanoid()}
+              navShown={navShown}
+              setAsideState={setAsideState}
+              clickedEvent={clickedEvent}
+              setClickedEvent={setClickedEvent}
+            />
+          ) : asideState === 'add' ? (
+            <AddItem
+              key={nanoid()}
+              navShown={navShown}
+              setAsideState={setAsideState}
+              setNewItem={setNewItem}
+            />
+          ) : (
+            <ItemPreview
+              setAsideState={setAsideState}
+              newItem={newItem}
+              key={nanoid()}
+              navShown={navShown}
+            />
+          ))}
       </AnimatePresence>
     </main>
   )

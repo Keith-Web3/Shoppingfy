@@ -92,7 +92,7 @@ function App() {
           )}
           <Route path="*" element={<Navigate to="/signup" />} />
         </Routes>
-        {isLoggedIn &&
+        {!['/login', '/signup'].includes(location.pathname) &&
           (asideState === 'list' ? (
             <ShoppingList
               key={nanoid()}

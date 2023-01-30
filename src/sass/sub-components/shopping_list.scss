@@ -8,7 +8,6 @@
   font-family: 'Quicksand', 'Nunito', Verdana, Geneva, Tahoma, sans-serif;
   height: 100%;
   grid-area: aside;
-  position: relative;
 
   @media (min-width: 750px) {
     display: block !important;
@@ -59,6 +58,7 @@
   }
   .heading {
     @include v.flexbox($justify: space-between);
+    flex-wrap: wrap;
     margin-top: v.$spacer;
 
     p {
@@ -66,8 +66,50 @@
       font-size: 1.2rem;
     }
 
-    img {
-      width: 15px;
+    .add-category {
+      display: flex;
+      gap: 0.5em;
+      cursor: pointer;
+
+      p {
+        font-size: 15px;
+      }
+      img {
+        width: 15px;
+      }
+    }
+    .input-container {
+      width: 100%;
+      // transform-origin: 0 0;
+      // transform: scaleY(0);
+      position: relative;
+      overflow: hidden;
+      transition: height 200ms linear;
+      height: 0;
+
+      &.active {
+        // position: relative;
+        // transform: scaleY(1);
+        height: 52px;
+      }
+
+      input {
+        outline: none;
+        padding: 0.75em 1.3em;
+        width: 100%;
+        border: 2px solid #56ccf2;
+        border-radius: 12px;
+      }
+      button {
+        all: unset;
+        background-color: #56ccf2;
+        color: #fff;
+        border-radius: 12px;
+        padding: 0.95em 1.3em;
+        position: absolute;
+        inset: 0 0 0 auto;
+        cursor: pointer;
+      }
     }
   }
   .items-container {
@@ -97,7 +139,6 @@
       }
       button {
         background-color: #c1c1c4;
-        // color: #000;
       }
     }
 

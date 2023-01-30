@@ -33,5 +33,9 @@
     grid-auto-rows: auto;
     align-items: start;
     gap: v.$spacer;
+
+    h2:only-child {
+      display: none;
+    }
   }
 }

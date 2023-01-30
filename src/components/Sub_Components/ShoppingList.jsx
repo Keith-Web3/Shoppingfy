@@ -1,4 +1,4 @@
-import React, { useId, useRef } from 'react'
+import React, { useId, useRef, useState } from 'react'
 import { nanoid } from 'nanoid'
 import { motion } from 'framer-motion'
 import { useSelector, useDispatch } from 'react-redux'
@@ -23,10 +23,24 @@ function ShoppingList({
   const id = useId()
   const navigate = useNavigate()
   const inputRef = useRef()
+  const categoryInputRef = useRef()
+  const [displayInputContainer, setDisplayInputContainer] = useState(false)
   const dispatch = useDispatch()
 
   const state = useSelector(state => Object.entries(state.items))
   const cartIsEmpty = state.every(el => el[1].every(item => item.count === 0))
+
+  const addCategory = function () {
+    dispatch(
+      actions.items.addCategory({ category: categoryInputRef.current.value })
+    )
+    setDisplayInputContainer(false)
+    dispatch(
+      actions.auth.resetErrorMessage(
+        `${categoryInputRef.current.value} has been added to your categories. \n Add an item to this category for it to display`
+      )
+    )
+  }
 
   const submitHandler = async function () {
     if (cartIsEmpty) return
@@ -94,7 +108,33 @@ function ShoppingList({
         <div className="container">
           <div className="heading">
             <p>Shopping list</p>
-            <img src={pen} alt="add-item" />
+            <div
+              className="add-category"
+              onClick={() => setDisplayInputContainer(prev => !prev)}
+            >
+              <p>Add Category</p>
+              <img src={pen} alt="add-item" />
+            </div>
+            <div
+              className={`input-container ${
+                displayInputContainer ? 'active' : ''
+              }`}
+            >
+              <input
+                type="text"
+                ref={categoryInputRef}
+                onKeyDown={e => {
+                  if (e.key !== 'Enter') return
+                  addCategory()
+                }}
+              />
+              <button
+                disabled={!!categoryInputRef.current?.value.trim()}
+                onClick={addCategory}
+              >
+                Add
+              </button>
+            </div>
           </div>
           {state.map(item => {
             return (

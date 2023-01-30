@@ -103,6 +103,9 @@ const itemsSlice = createSlice({
         checked: !state[payload.category][idx].checked,
       }
     },
+    addCategory(state, { payload }) {
+      state[payload.category] = []
+    },
   },
 })
 

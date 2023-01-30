@@ -1,16 +1,26 @@
-import React from 'react'
+import React, { useState, useDeferredValue } from 'react'
 import { nanoid } from 'nanoid'
 import { motion } from 'framer-motion'
 import { useSelector, useDispatch } from 'react-redux'
 
+import useFilter from '../../Hooks/useFilter'
 import actions from '../../Store/index'
 import Header from './Header'
 import Item from '../../Sub_Components/Item'
 import '../../../sass/pages/homepage.scss'
 
 function Homepage({ navShown }) {
-  const state = useSelector(state => Object.entries(state.items))
+  // const state = useSelector(state => Object.entries(state.items))
   const dispatch = useDispatch()
+  const [searchParam, setSearchParam] = useState('')
+  const debouncedValue = useDeferredValue(searchParam)
+  const [filteredData] = useFilter(debouncedValue)
+  const state = Object.entries(filteredData)
+  // console.log(filteredData)
+  // if (filteredData.item) {
+  //   console.log(Object.entries(filteredData))
+  // }
+  // // const state = Object.entries(filterdData.items)
 
   return (
     <motion.div
@@ -21,7 +31,7 @@ function Homepage({ navShown }) {
       style={{ display: navShown ? 'none' : 'block' }}
     >
       <div className="container">
-        <Header />
+        <Header setSearchParam={setSearchParam} />
         <section>
           {state.map(item => {
             return (

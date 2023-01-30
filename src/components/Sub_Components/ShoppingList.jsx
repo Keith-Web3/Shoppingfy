@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setDoc, doc } from 'firebase/firestore'
 
-import { database } from '../Data/firebase'
+import { database, auth } from '../Data/firebase'
 import actions from '../Store/index'
 import bottle from '../../assets/source.svg'
 import shopper from '../../assets/shopping_app.svg'
@@ -40,7 +40,7 @@ function ShoppingList({
         .format(date)
         .split(' ')
 
-      const id = Date.now()
+      const id = `${auth.currentUser.uid}${Date.now()}`
       dispatch(
         actions.events.addEvent({
           day: `${week} ${day.join('.')}`,

@@ -1,6 +1,7 @@
 .form-template {
   font-weight: 400;
   padding: 1em;
+  grid-column: 1 / -1;
 
   &::after {
     content: '';

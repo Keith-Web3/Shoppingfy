@@ -1,9 +1,10 @@
 .form-template {
   font-weight: 400;
   padding: 1em;
+  font-family: 'Quicksand', 'Nunito';
   grid-column: 1 / -1;
-  background-color: red;
-  width: max-content;
+  background-color: #252329;
+  margin-block: 1.5em;
 
   &::after {
     content: '';

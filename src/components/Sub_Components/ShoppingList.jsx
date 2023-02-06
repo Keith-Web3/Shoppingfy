@@ -54,14 +54,14 @@ function ShoppingList({
         .format(date)
         .split(' ')
 
-      const id = `${auth.currentUser.uid}${Date.now()}`
+      const now = `${Date.now()}`
       dispatch(
         actions.events.addEvent({
           day: `${week} ${day.join('.')}`,
           state: 'pending',
           name: inputRef.current.value,
           date: `${monthL.slice(0, -1)} ${day[2]}`,
-          id,
+          id: now,
         })
       )
 
@@ -74,11 +74,14 @@ function ShoppingList({
         .filter(el => el.length !== 0)
 
       try {
-        const res = await setDoc(doc(database, 'selectedItems', `${id}`), {
-          name: inputRef.current.value,
-          day: `${week} ${day.join('.')}`,
-          ...Object.fromEntries(selectedItems),
-        })
+        const res = await setDoc(
+          doc(database, 'selectedItems', `${auth.currentUser.uid}${now}`),
+          {
+            name: inputRef.current.value,
+            day: `${week} ${day.join('.')}`,
+            ...Object.fromEntries(selectedItems),
+          }
+        )
       } catch (err) {
         console.log(err.message)
       }

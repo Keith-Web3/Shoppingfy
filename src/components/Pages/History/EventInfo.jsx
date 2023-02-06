@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { doc, getDoc } from 'firebase/firestore'
 import { nanoid } from 'nanoid'
 
+import { auth } from '../../Data/firebase'
 import { database } from '../../Data/firebase'
 import Events from './Events'
 import '../../../sass/pages/event_info.scss'
@@ -17,7 +18,11 @@ function EventInfo() {
 
   useEffect(() => {
     ;(async () => {
-      const docRef = doc(database, 'selectedItems', `${params.id.slice(1)}`)
+      const docRef = doc(
+        database,
+        'selectedItems',
+        `${auth.currentUser.uid}${params.id.slice(1)}`
+      )
       const docSnap = await getDoc(docRef)
 
       if (docSnap.exists()) {
